@@ -1,0 +1,19 @@
+<VirtualHost *:80>
+        ServerName php7_server
+
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www
+
+
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+
+        <Directory /var/www/>
+                Order allow,deny
+                Allow from all
+                Require all granted
+                AllowOverride All
+        </Directory>
+
+</VirtualHost>

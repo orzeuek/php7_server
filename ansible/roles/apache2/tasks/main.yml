@@ -1,0 +1,21 @@
+---
+  - name: install apache2
+    apt: pkg=apache2
+
+  - name: enabled mod_rewrite
+    apache2_module: name=rewrite state=present
+
+  - name: delete default apache2 site direcotry (/var/www/html)
+    shell: rm -rf /var/www/html
+
+  - name: upload apache2 gtx.local site configuration
+    copy: src="../files/apache_site_available_root" dest=/etc/apache2/sites-available/root.conf
+
+  - name: enable root site
+    shell: a2ensite root
+
+  - name: add gtx.local to /etc/hosts file
+    lineinfile: dest=/etc/hosts line="127.0.0.1 php7_server" state=present
+
+  - name: restart apache
+    service: name=apache2 state=restarted

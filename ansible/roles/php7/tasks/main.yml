@@ -1,0 +1,19 @@
+---
+
+  - name: add php7 repository
+    apt_repository: repo='ppa:ondrej/php'
+
+  - name: install php7 with dev package
+    apt: name=php7.0-dev update_cache=yes
+
+  - name: install libapache2 mod php7
+    apt: pkg=libapache2-mod-php7.0
+
+  - name: install xdebug for php7
+    script: ../scripts/compile_xdebug_for_php7.sh
+
+  - name: copy xdebug configuration for php7 apache2 module
+    copy: src="../files/php-xdebug-config.ini" dest="/etc/php/7.0/apache2/conf.d/20-xdebug.ini"
+
+  - name: copy xdebug configuration for php7 cli
+    copy: src="../files/php-xdebug-config.ini" dest="/etc/php/7.0/cli/conf.d/20-xdebug.ini"

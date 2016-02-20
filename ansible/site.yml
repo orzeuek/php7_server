@@ -1,0 +1,13 @@
+---
+
+### Examples:
+### ansible-playbook site.yml -i hosts --limit test #run only hosts from group [test:children]
+
+- hosts: php7_server
+  sudo: True
+  user: vagrant
+  roles:
+    - apache2
+    - php7
+    - git
+    - composer
